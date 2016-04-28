@@ -45,11 +45,6 @@ for(i in 1:length(test.xs)){
             pc <- cmdscale(vegdist(test.x))
 
             pdf(sprintf('clustering_%s_%s.pdf',x.name, gsub(' ','_',test.name)),width=4,height=4)
-            # plot(pc[,1], pc[,2], col=brewer.pal(9,'Set1')[-6][as.numeric(droplevels(mc$Cohort[test.ix]))])
-            # for(lev in as.numeric(droplevels(mc$Cohort[test.ix]))){
-            #     ix <- as.numeric(droplevels(mc$Cohort[test.ix])) == lev
-            #     Plot_ConvexHull(pc[ix,1], pc[ix,2], lcolor=brewer.pal(9,'Set1')[-6][lev])
-            # }
 
             plot(pc[,1], pc[,2], col=brewer.pal(9,'Set1')[-6][as.numeric(mc$Cohort[test.ix])])
             for(lev in as.numeric(mc$Cohort[test.ix])){
