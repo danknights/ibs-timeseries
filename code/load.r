@@ -1,4 +1,4 @@
-DATADIR <- 'data_files/'
+DATADIR <- '../data_files/'
 mapfp <- paste(DATADIR,'mappingfile_deidentified_nov2015_edit.txt',sep='')
 taxfp <- paste(DATADIR,'taxonomy_table.txt',sep='')
 
