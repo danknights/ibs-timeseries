@@ -1,4 +1,4 @@
-DATADIR <- '../data_files/'
+DATADIR <- '../data/'
 mapfp <- paste(DATADIR,'mappingfile_deidentified_nov2015_edit.txt',sep='')
 taxfp <- paste(DATADIR,'taxonomy_table.txt',sep='')
 
@@ -66,9 +66,9 @@ ix.ibs <- m$Cohort != "Healthy"
 
 # difftest <- differentiation.test(xc, mc$Cohort)
 
-sink('data_files/map.txt'); cat('#SampleID\t'); write.table(m, sep='\t',quote=F); sink(NULL)
-sink('data_files/species.txt'); cat('Taxon\t'); write.table(t(xsp), sep='\t',quote=F); sink(NULL)
-sink('data_files/genus.txt'); cat('Taxon\t'); write.table(t(xgn), sep='\t',quote=F); sink(NULL)
-sink('data_files/map-collapsed.txt'); cat('#SampleID\t'); write.table(mc, sep='\t',quote=F); sink(NULL)
-sink('data_files/species-collapsed.txt'); cat('Taxon\t'); write.table(t(xspc), sep='\t',quote=F); sink(NULL)
-sink('data_files/genus-collapsed.txt'); cat('Taxon\t'); write.table(t(xgnc), sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/map.txt',DATADIR)); cat('#SampleID\t'); write.table(m, sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/species.txt',DATADIR)); cat('Taxon\t'); write.table(t(xsp), sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/genus.txt',DATADIR)); cat('Taxon\t'); write.table(t(xgn), sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/map-collapsed.txt',DATADIR)); cat('#SampleID\t'); write.table(mc, sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/species-collapsed.txt',DATADIR)); cat('Taxon\t'); write.table(t(xspc), sep='\t',quote=F); sink(NULL)
+sink(sprintf('%s/genus-collapsed.txt',DATADIR)); cat('Taxon\t'); write.table(t(xgnc), sep='\t',quote=F); sink(NULL)
