@@ -63,31 +63,23 @@ library('vegan')
     }
 
 
-    # draw transparent ellipse for each subject
+    # draw transparent ellipse for each subject, only after past final timepoint
+    # for that subject
     for(j in 1:length(levels(subject))){
         subj <- levels(subject)[j]
         all.ix <- subject == subj & timept <= step
         pc.subj <- pc[all.ix,,drop=F]
         subj.col <- cols[which(all.ix)[1]]
         # fade out last ellipse, fade in new
-        if(nrow(pc.subj) > 2){
+        if(nrow(pc.subj) > 2 && !any(subject == subj & timept > step)){
             ellipse.alpha.j <- ellipse.alpha
-            if(ceiling(step) > step && any(subject == subj & timept == ceiling(step))){
-                ellipse.alpha.j <- ellipse.alpha.j * (1 - frac)
+            # fade in only at first
+            if(any(subject == subj & timept == floor(step))){
+                ellipse.alpha.j <- ellipse.alpha.j * frac
             }
             subj.col.alpha <- round(ellipse.alpha.j * 255)
             subj.col <- sprintf('%s%s',substr(subj.col,1,7), format(as.hexmode(subj.col.alpha),width=2))
             dataEllipse(pc.subj[,1], pc.subj[,2], plot.points=FALSE,center.cex=NA, levels=2 * pnorm(1) - 1,fill=TRUE,fill.alpha=ellipse.alpha.j,col=subj.col)
-        }
-
-        if(ceiling(step) > step && any(subject == subj & timept == ceiling(step))){
-            all.ix <- subject == subj & timept <= ceiling(step)
-            pc.subj <- pc[all.ix,,drop=F]
-            if(nrow(pc.subj) > 2){
-                subj.col.alpha <- round(ellipse.alpha * frac * 255)
-                subj.col <- sprintf('%s%s',substr(subj.col,1,7), format(as.hexmode(subj.col.alpha),width=2))
-                dataEllipse(pc.subj[,1], pc.subj[,2], plot.points=FALSE,center.cex=NA, levels=2 * pnorm(1) - 1,fill=TRUE,fill.alpha=ellipse.alpha * frac,col=subj.col)
-            }
         }
     }        
 }
