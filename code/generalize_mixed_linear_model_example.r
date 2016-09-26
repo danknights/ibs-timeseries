@@ -1,3 +1,5 @@
+library('lme4')
+
 # generate log-normal microbiome data; 100 samples with 10 species
 x <- matrix(exp(rnorm(1000)),100); colnames(x) <- sprintf('Species%03d',1:ncol(x)); rownames(x) <- sprintf('Sample%03d',1:nrow(x)); x <- sweep(x,1,rowSums(x),'/')
 
